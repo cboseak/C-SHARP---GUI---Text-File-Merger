@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,15 +13,12 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
-        private string path1, path2;
+        private string path1, path2, savePath;
+
         private List<String> mergeQueue = new List<string> { };
         public Form1()
         {
             InitializeComponent();
-        }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -49,13 +46,6 @@ namespace WindowsFormsApplication1
                 }
                 sr.Close();
             }
-        }
-
-
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -89,36 +79,9 @@ namespace WindowsFormsApplication1
         {
             if(saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                string save = saveFileDialog1.FileName;
-
-   
+                savePath = Path.GetDirectoryName(saveFileDialog1.FileName) + "\\" + Path.GetFileName(saveFileDialog1.FileName);
+                textBox3.Text = savePath;
             }
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            //string pathOf = Path.GetDirectoryName();
-            //textBox1.Text = 
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -130,20 +93,11 @@ namespace WindowsFormsApplication1
             }
         }
 
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
- 
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
             if(comboBox1.SelectedIndex == 0)
             {
+                textBox6.Clear();
                 var results =
                     from i in mergeQueue
                     orderby i ascending
@@ -156,6 +110,7 @@ namespace WindowsFormsApplication1
             }
             else if (comboBox1.SelectedIndex == 1)
             {
+                textBox6.Clear();
                 var results =
                     from i in mergeQueue
                     orderby i descending
@@ -171,8 +126,22 @@ namespace WindowsFormsApplication1
 
         private void button6_Click(object sender, EventArgs e)
         {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(File.Create(savePath)))
+                {
+                    sw.Write(textBox6.Text);
+
+                    MessageBox.Show("Output File Written!" + "\n" + savePath);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Please specify output file directory before saving");
+            }
 
         }
+
 
     }
 }
