@@ -30,10 +30,17 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //Filter types of files that show in open file dialog
+            openFileDialog1.Filter = "Text Files (*.txt)|*.txt|" +
+                        "All files (*.*)|*.*";
+
             if(openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 StreamReader sr = new StreamReader(openFileDialog1.FileName);
-       
+
+                //Filter types of files that show in open file dialog
+                openFileDialog1.Filter = "Text Files (*.txt)|*.txt|";
+
                 //this is the path of the first input file, saved in a string, so that it
                 //can be used anywhere that it is needed.
                 pathOfFile = Path.GetDirectoryName(openFileDialog1.FileName) + "\\" + Path.GetFileName(openFileDialog1.FileName);
@@ -68,10 +75,16 @@ namespace WindowsFormsApplication1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //Filter types of files that show in open file dialog
+            openFileDialog2.Filter = "Text Files (*.txt)|*.txt|" +
+                        "All files (*.*)|*.*";
+
             if (openFileDialog2.ShowDialog() == DialogResult.OK)
             {
 
                 StreamReader sr = new StreamReader(openFileDialog2.FileName);
+
+
 
                 //this is the path of the second input file, saved in a string, so that it
                 //can be used anywhere that it is needed.
