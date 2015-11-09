@@ -39,7 +39,6 @@ namespace WindowsFormsApplication1
                 StreamReader sr = new StreamReader(openFileDialog1.FileName);
 
                 //Filter types of files that show in open file dialog
-                openFileDialog1.Filter = "Text Files (*.txt)|*.txt|";
 
                 //this is the path of the first input file, saved in a string, so that it
                 //can be used anywhere that it is needed.
@@ -151,6 +150,8 @@ namespace WindowsFormsApplication1
                 //ascending
                 var results =
                     from i in mergeQueue
+                    where i != ""
+                    where i != " "
                     orderby i ascending
                     select i;
 
@@ -171,6 +172,8 @@ namespace WindowsFormsApplication1
                 //descending
                 var results =
                     from i in mergeQueue
+                    where i != ""
+                    where i != " "
                     orderby i descending
                     select i;
 
@@ -178,8 +181,9 @@ namespace WindowsFormsApplication1
                 //loop that will output the strings
                 foreach (var line in results)
                 {
-                    textBox6.AppendText(line);
-                    textBox6.AppendText("\n");
+                        textBox6.AppendText(line);
+                        textBox6.AppendText("\n");
+
                 }
             }
 
