@@ -25,6 +25,8 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+            button4.Enabled = false;
+            button6.Enabled = false;
         }
 
 
@@ -61,6 +63,7 @@ namespace WindowsFormsApplication1
                         textBox4.AppendText("\n");
                         
                     }
+                    button4.Enabled = true;
                 }
                 //just incase there is an issue reading the file. I may later implement
                 //a more specific exception handling systes.
@@ -82,8 +85,6 @@ namespace WindowsFormsApplication1
             {
 
                 StreamReader sr = new StreamReader(openFileDialog2.FileName);
-
-
 
                 //this is the path of the second input file, saved in a string, so that it
                 //can be used anywhere that it is needed.
@@ -111,8 +112,7 @@ namespace WindowsFormsApplication1
                     MessageBox.Show("Error Reading File!");
                 }
                 sr.Close();
-            }
-            
+            }        
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -125,6 +125,8 @@ namespace WindowsFormsApplication1
                 savePath = Path.GetDirectoryName(saveFileDialog1.FileName) + "\\" + Path.GetFileName(saveFileDialog1.FileName);
                 textBox3.Text = savePath;
             }
+            if (savePath != null)
+                button6.Enabled = true;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -183,10 +185,8 @@ namespace WindowsFormsApplication1
                 {
                         textBox6.AppendText(line);
                         textBox6.AppendText("\n");
-
                 }
             }
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -210,9 +210,6 @@ namespace WindowsFormsApplication1
             {
                 MessageBox.Show("Please specify output file directory before saving");
             }
-
         }
-
-
     }
 }
